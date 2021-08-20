@@ -6,4 +6,5 @@ import lombok.Data;
 public class FakultasDto {
     private Long idFakultas;
     private String namaFakultas;
+    private String kodeFakultas;
 }

@@ -16,4 +16,7 @@ public class FakultasEntity {
 
     @Column(name = "nama_fakutas")
     private String namaFakultas;
+
+    @Column(name = "kode_fakultas")
+    private String kodeFakultas;
 }
