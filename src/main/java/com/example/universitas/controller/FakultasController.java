@@ -1,9 +1,14 @@
 package com.example.universitas.controller;
 
+import com.example.universitas.model.dto.FakultasDto;
+import com.example.universitas.model.entity.FakultasEntity;
 import com.example.universitas.service.FakultasService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class FakultasController {
@@ -14,5 +19,38 @@ public class FakultasController {
     @Autowired
     ModelMapper modelMapper;
 
+    private FakultasDto converToDto(FakultasEntity fakultasEntity) {
+        FakultasDto fakultasDto = modelMapper.map(fakultasEntity, FakultasDto.class);
+        return fakultasDto;
+    }
 
+    private FakultasEntity converToEntity(FakultasDto fakultasDto) {
+        FakultasEntity fakultasEntity = modelMapper.map(fakultasDto, FakultasEntity.class);
+        return fakultasEntity;
+    }
+
+    @GetMapping
+    public List<FakultasDto> getAllFakultas(){
+        List<FakultasEntity> fakultasEntityList = fakultasService.getAllFakultas();
+        return fakultasEntityList.stream().map(this::converToDto).collect(Collectors.toList());
+    }
+
+    @GetMapping
+    public FakultasDto getFakultasById(@RequestParam("id") Long id){
+        return converToDto(fakultasService.getByFakultasId(id));
+    }
+
+    @PostMapping
+    public FakultasDto insertFakultas(@RequestBody FakultasDto fakultasDto) {
+        FakultasEntity fakultasEntity = converToEntity(fakultasDto);
+        FakultasEntity fakultasInsert = fakultasService.saveFakultas(fakultasEntity);
+        return converToDto(fakultasInsert);
+    }
+
+    @PutMapping
+    public FakultasDto editFakultas(@RequestBody FakultasDto fakultasDto) {
+        FakultasEntity fakultasEntity = converToEntity(fakultasDto);
+        FakultasEntity fakultasEdit = fakultasService.saveFakultas(fakultasEntity);
+        return converToDto(fakultasEdit);
+    }
 }
