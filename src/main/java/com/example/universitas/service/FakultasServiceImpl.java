@@ -22,7 +22,7 @@ public class FakultasServiceImpl implements FakultasService {
     }
 
     @Override
-    public FakultasEntity getByFakultasId(Long id){
+    public FakultasEntity getByFakultasId(String id){
         return fakultasRepo.findById(id).get();
     }
 

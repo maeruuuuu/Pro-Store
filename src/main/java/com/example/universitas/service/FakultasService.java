@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FakultasService {
     List<FakultasEntity> getAllFakultas();
-    FakultasEntity getByFakultasId(Long id);
+    FakultasEntity getByFakultasId(String id);
     public FakultasEntity saveFakultas(FakultasEntity fakultasEntity);
 }

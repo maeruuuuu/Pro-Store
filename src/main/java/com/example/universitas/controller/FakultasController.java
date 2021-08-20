@@ -35,8 +35,8 @@ public class FakultasController {
         return fakultasEntityList.stream().map(this::converToDto).collect(Collectors.toList());
     }
 
-    @GetMapping
-    public FakultasDto getFakultasById(@RequestParam("id") Long id){
+    @GetMapping(value = "/fakultas")
+    public FakultasDto getFakultasById(@RequestParam("id") String id){
         return converToDto(fakultasService.getByFakultasId(id));
     }
 
