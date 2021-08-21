@@ -28,7 +28,9 @@ public class FakultasServiceImpl implements FakultasService {
 
     @Override
     public FakultasEntity saveFakultas(FakultasEntity fakultasEntity){
+
         return fakultasRepo.save(fakultasEntity);
+
     }
 
 
