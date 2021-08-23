@@ -11,9 +11,14 @@ import javax.persistence.*;
 public class JurusanEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "jur-generator")
+    @GenericGenerator(name = "jur-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "PRODI"),
+            strategy = "com.example.universitas.generator.MyGenerator"
+    )
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_jurusan")
-    private Long idJurusan;
+    private String idJurusan;
 
     @Column(name = "nama_jurusan")
     private String namaJurusan;
@@ -29,10 +34,15 @@ public class JurusanEntity {
 //                    @Parameter(name = "increment_size", value = "1")
 //            }
 //    )
-    @Column(name = "kode_jurusan")
-    private Long kodeJurusan;
 
+
+    @Column(name = "kode_jurusan")
+    private String kodeJurusan;
     @Column(name = "fk_Kode_fakultas")
     private Long fkKodeFakultas;
+
+    @ManyToOne
+    @JoinColumn(name = "jurusanEntity", insertable = false, updatable = false)
+    private JurusanEntity jurusan;
 
 }

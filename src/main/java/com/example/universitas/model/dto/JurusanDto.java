@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class JurusanDto {
 
-    private long idJurusan;
+    private String idJurusan;
     private String namaJurusan;
-    private long kodeJurusan;
+    private String kodeJurusan;
     private long fkKodeFakultas;
 }

@@ -7,15 +7,15 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface JurusanRepo extends JpaRepository<JurusanEntity, Long> {
+public interface JurusanRepo extends JpaRepository<JurusanEntity, String> {
 
-    @Query (
-            value = "SELECT *" +
-                    "FROM jurusan" +
-                    "WHERE jurusan.id_jurusan =: idJurusan",
-            nativeQuery = true
-    )
-    List<JurusanEntity> findByIdJurusan(@Param("idJurusan") Long idJurusab);
+//    @Query (
+//            value = "SELECT *" +
+//                    "FROM jurusan" +
+//                    "WHERE jurusan.id_jurusan =: idJurusan",
+//            nativeQuery = true
+//    )
+//    List<JurusanEntity> findByIdJurusan(@Param("idJurusan") String idJurusan);
 
     @Query (
             value = "SELECT *" +
@@ -26,12 +26,12 @@ public interface JurusanRepo extends JpaRepository<JurusanEntity, Long> {
     List<JurusanEntity> findByFak(@Param("fkKodeFakultas") Long fkKodeFakultas);
 
     @Query (
-            value = "SELECT jurusan, COUNT(jurusan) AS jumlah" +
+            value = "SELECT *, COUNT(jurusan) AS jumlah" +
                     "FROM jurusan" +
                     "GROUP BY jumlah" +
-                    "WHERE jurusan.fk_Kode_fakultas =: fkKodeFakultas",
+                    "WHERE jurusan.fk_kode_fakultas = :fkKodeFakultas",
             nativeQuery = true
     )
-    Long countJurByFak(@Param("fkKodeFakultas") Long fkKodeFakultas);
+    List<JurusanEntity> countJurByFak(@Param("fkKodeFakultas") Long fkKodeFakultas);
 
 }

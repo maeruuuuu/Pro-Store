@@ -5,14 +5,16 @@ import com.example.universitas.model.entity.JurusanEntity;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface JurusanService {
 
     List<JurusanEntity> getAllJurusan();
-    List<JurusanEntity> getJurusanById(Long id);
-    List<JurusanEntity> getJurusanByFak(Long fak);
+    ResponseEntity<Optional<JurusanEntity>> getJurusanById(String id);
+    List<JurusanEntity> delJurusanById(String id);
+    List<JurusanEntity> getJurusanByFak(long fak);
     JurusanEntity saveJurusan(JurusanEntity jurusanEntity);
-    ResponseEntity<JurusanEntity> updateJurusan(Long idJurusan, JurusanEntity jurusanDetails)throws ResourceNotFoundException;
-    Long countJurByFak(Long fak);
+    ResponseEntity<JurusanEntity> updateJurusan(String idJurusan, JurusanEntity jurusanDetails)throws ResourceNotFoundException;
+    List<JurusanEntity> countJurByFak(Long fak);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,14 +28,21 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
-    public List<JurusanEntity> getJurusanById(Long idJurusan) {
+    public ResponseEntity<Optional<JurusanEntity>> getJurusanById(String idJurusan) {
+        Optional<JurusanEntity> jurusanEntities = jurusanRepo.findById(idJurusan);
+        return ResponseEntity.ok().body(jurusanEntities);
+    }
+
+    @Override
+    public List<JurusanEntity> delJurusanById(String idJurusan) {
+        jurusanRepo.deleteById(idJurusan);
         List<JurusanEntity> jurusanEntities = new ArrayList<>();
-        jurusanRepo.findByIdJurusan(idJurusan).forEach(jurusanEntities::add);
+        jurusanRepo.findAll().forEach(jurusanEntities::add);
         return jurusanEntities;
     }
 
     @Override
-    public List<JurusanEntity> getJurusanByFak(Long fkKodeFakultas) {
+    public List<JurusanEntity> getJurusanByFak(long fkKodeFakultas) {
         List<JurusanEntity> jurusanEntities = new ArrayList<>();
         jurusanRepo.findByFak(fkKodeFakultas).forEach(jurusanEntities::add);
         return jurusanEntities;
@@ -46,7 +54,7 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
-    public ResponseEntity<JurusanEntity> updateJurusan(Long idJurusan, JurusanEntity jurusanDetails) throws ResourceNotFoundException {
+    public ResponseEntity<JurusanEntity> updateJurusan(String idJurusan, JurusanEntity jurusanDetails) throws ResourceNotFoundException {
 
         JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan)
                 .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id :: " + idJurusan));
@@ -58,8 +66,8 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
-    public Long countJurByFak(Long fkKodeFakultas) {
-        Long jumlah;
+    public List<JurusanEntity> countJurByFak(Long fkKodeFakultas) {
+        List<JurusanEntity> jumlah;
         jumlah = jurusanRepo.countJurByFak(fkKodeFakultas);
         return jumlah;
     }
