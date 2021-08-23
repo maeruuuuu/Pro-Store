@@ -29,7 +29,7 @@ public interface JurusanRepo extends JpaRepository<JurusanEntity, Long> {
             value = "SELECT jurusan, COUNT(jurusan) AS jumlah" +
                     "FROM jurusan" +
                     "GROUP BY jumlah" +
-                    "WHERE jurusan.fk_Kode_fakultas =: fkKodeFakultas",,
+                    "WHERE jurusan.fk_Kode_fakultas =: fkKodeFakultas",
             nativeQuery = true
     )
     Long countJurByFak(@Param("fkKodeFakultas") Long fkKodeFakultas);

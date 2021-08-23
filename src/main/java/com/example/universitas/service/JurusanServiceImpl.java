@@ -5,11 +5,15 @@ import com.example.universitas.model.entity.JurusanEntity;
 import com.example.universitas.repository.JurusanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JurusanServiceImpl implements JurusanService{
+@Service
+@Transactional
+public class JurusanServiceImpl implements JurusanService {
 
     @Autowired
     public JurusanRepo jurusanRepo;
@@ -37,12 +41,12 @@ public class JurusanServiceImpl implements JurusanService{
     }
 
     @Override
-    public JurusanEntity saveJurusan(JurusanEntity jurusanEntity){
+    public JurusanEntity saveJurusan(JurusanEntity jurusanEntity) {
         return jurusanRepo.save(jurusanEntity);
     }
 
     @Override
-    public ResponseEntity<JurusanEntity> updateJurusan(Long idJurusan, JurusanEntity jurusanDetails)throws ResourceNotFoundException {
+    public ResponseEntity<JurusanEntity> updateJurusan(Long idJurusan, JurusanEntity jurusanDetails) throws ResourceNotFoundException {
 
         JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan)
                 .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id :: " + idJurusan));
@@ -54,8 +58,9 @@ public class JurusanServiceImpl implements JurusanService{
     }
 
     @Override
-    public Long countJurByFak(Long fkKodeFakultas){
+    public Long countJurByFak(Long fkKodeFakultas) {
         Long jumlah;
         jumlah = jurusanRepo.countJurByFak(fkKodeFakultas);
         return jumlah;
+    }
 }
