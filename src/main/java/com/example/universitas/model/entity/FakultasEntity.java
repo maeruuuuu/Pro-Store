@@ -22,6 +22,6 @@ public class FakultasEntity {
     @Column(name = "nama_fakutas")
     private String namaFakultas;
 
-    @Column(name = "kode_fakultas")
+    @Column(name = "kode_fakultas", unique = true)
     private String kodeFakultas;
 }

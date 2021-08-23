@@ -31,7 +31,7 @@ public class MyGenerator implements IdentifierGenerator, Configurable {
                 .max()
                 .orElse(0L);
 
-        return prefix + "-" + (max + 1);
+        return prefix + "-" + String.format("%03d",(max + 1));
     }
 
 

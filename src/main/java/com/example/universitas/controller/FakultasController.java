@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("api/fakultas")
 public class FakultasController {
 
     @Autowired
@@ -35,8 +36,8 @@ public class FakultasController {
         return fakultasEntityList.stream().map(this::converToDto).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/fakultas")
-    public FakultasDto getFakultasById(@RequestParam("id") String id){
+    @GetMapping("/{id}")
+    public FakultasDto getFakultasById(@PathVariable("id") String id){
         return converToDto(fakultasService.getByFakultasId(id));
     }
 
