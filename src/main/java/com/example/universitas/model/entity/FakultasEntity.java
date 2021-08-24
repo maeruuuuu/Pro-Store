@@ -1,6 +1,7 @@
 package com.example.universitas.model.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -10,13 +11,17 @@ import javax.persistence.*;
 public class FakultasEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "fak-generator")
+    @GenericGenerator(name = "fak-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "FAK"),
+            strategy = "com.example.universitas.identifier.MyGenerator"
+    )
     @Column(name = "id_fakultas")
-    private Long idFakultas;
+    private String idFakultas;
 
     @Column(name = "nama_fakutas")
     private String namaFakultas;
 
-    @Column(name = "kode_fakultas")
+    @Column(name = "kode_fakultas", unique = true)
     private String kodeFakultas;
 }
