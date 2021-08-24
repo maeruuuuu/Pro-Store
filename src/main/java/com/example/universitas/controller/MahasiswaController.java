@@ -1,7 +1,7 @@
 package com.example.universitas.controller;
 
 import com.example.universitas.model.dto.MahasiswaDto;
-import com.example.universitas.model.entity.Mahasiswa;
+import com.example.universitas.model.entity.MahasiswaEntity;
 import com.example.universitas.model.projection.MahasiswaProjection;
 import com.example.universitas.service.MahasiswaServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -23,8 +23,8 @@ public class MahasiswaController {
 
     // Mapping section
     @PostMapping
-    public MahasiswaDto saveMahasiswa(@RequestBody Mahasiswa mahasiswa) {
-        return modelMapper.map(mahasiswaService.saveMahasiswa(mahasiswa), MahasiswaDto.class);
+    public MahasiswaDto saveMahasiswa(@RequestBody MahasiswaEntity mahasiswaEntity) {
+        return modelMapper.map(mahasiswaService.saveMahasiswa(mahasiswaEntity), MahasiswaDto.class);
     }
 
     @GetMapping
@@ -35,5 +35,10 @@ public class MahasiswaController {
     @GetMapping("/{id}")
     public MahasiswaProjection getMahasiswaById(@PathVariable("id") String idMahasiswa) {
         return mahasiswaService.getMahasiswaById(idMahasiswa);
+    }
+
+    @GetMapping("jumlah/{id}")
+    public Object countMahasiswaByIdFakultas(@PathVariable("id") String idFakultas) {
+        return mahasiswaService.countMahasiswaByIdFakultas(idFakultas);
     }
 }

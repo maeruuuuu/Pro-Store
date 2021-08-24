@@ -1,7 +1,6 @@
 package com.example.universitas.service;
 
-import com.example.universitas.model.dto.MahasiswaDto;
-import com.example.universitas.model.entity.Mahasiswa;
+import com.example.universitas.model.entity.MahasiswaEntity;
 import com.example.universitas.model.projection.MahasiswaProjection;
 import com.example.universitas.repository.MahasiswaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class MahasiswaServiceImpl implements MahasiswaService{
 
     @Override
     public List<MahasiswaProjection> getAllMahasiswa() {
-        return mahasiswaRepo.findAllDto();
+        return mahasiswaRepo.findAllProjection();
     }
 
     @Override
@@ -28,7 +27,12 @@ public class MahasiswaServiceImpl implements MahasiswaService{
     }
 
     @Override
-    public Mahasiswa saveMahasiswa(Mahasiswa mahasiswa) {
-        return mahasiswaRepo.save(mahasiswa);
+    public MahasiswaEntity saveMahasiswa(MahasiswaEntity mahasiswaEntity) {
+        return mahasiswaRepo.save(mahasiswaEntity);
+    }
+
+    @Override
+    public Object countMahasiswaByIdFakultas(String idFakultas) {
+        return mahasiswaRepo.countByIdFakultas(idFakultas);
     }
 }
