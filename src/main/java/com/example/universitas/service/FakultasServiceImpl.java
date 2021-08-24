@@ -1,7 +1,9 @@
 package com.example.universitas.service;
 
 import com.example.universitas.model.entity.FakultasEntity;
+import com.example.universitas.repository.DosenRepo;
 import com.example.universitas.repository.FakultasRepo;
+import com.example.universitas.repository.MahasiswaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,12 @@ public class FakultasServiceImpl implements FakultasService {
 
     @Autowired
     public FakultasRepo fakultasRepo;
+
+    @Autowired
+    private MahasiswaRepo mahasiswaRepo;
+
+    @Autowired
+    private DosenRepo dosenRepo;
 
     @Override
     public List<FakultasEntity> getAllFakultas(){
@@ -33,5 +41,11 @@ public class FakultasServiceImpl implements FakultasService {
 
     }
 
-
+    @Override
+    public Object countMahasiswaDosenByIdFakultas(String idFakultas){
+        Object jumlahMahasiswa = mahasiswaRepo.countByIdFakultas(idFakultas);
+        Long jumlahDosen = dosenRepo.countByIdFakultas(idFakultas);
+        String jumlahKeseluhuran = (idFakultas + "\nJumlah Mahasiswa: " + jumlahMahasiswa + "\nJumlah Dosen: " + jumlahDosen);
+        return jumlahKeseluhuran;
+    }
 }

@@ -12,4 +12,6 @@ public interface FakultasService {
 
     FakultasEntity saveFakultas(FakultasEntity fakultasEntity);
 
+    Object countMahasiswaDosenByIdFakultas(String idFakultas);
+
 }
