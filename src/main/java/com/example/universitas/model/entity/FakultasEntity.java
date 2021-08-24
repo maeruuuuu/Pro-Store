@@ -4,11 +4,12 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "fakultas")
-public class FakultasEntity {
+public class FakultasEntity implements Serializable {
 
     @Id
     @GeneratedValue(generator = "fak-generator")
@@ -22,6 +23,6 @@ public class FakultasEntity {
     @Column(name = "nama_fakutas")
     private String namaFakultas;
 
-    @Column(name = "kode_fakultas")
+    @Column(name = "kode_fakultas", unique = true)
     private String kodeFakultas;
 }
