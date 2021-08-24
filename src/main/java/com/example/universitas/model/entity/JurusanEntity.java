@@ -41,8 +41,8 @@ public class JurusanEntity {
     @Column(name = "fk_Kode_fakultas")
     private Long fkKodeFakultas;
 
-    @ManyToOne
-    @JoinColumn(name = "jurusanEntity", insertable = false, updatable = false)
-    private JurusanEntity jurusan;
+//    @ManyToOne
+//    @JoinColumn(name = "jurusanEntity", insertable = false, updatable = false)
+//    private JurusanEntity jurusan;
 
 }
