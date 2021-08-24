@@ -18,7 +18,7 @@ public interface MahasiswaRepo extends JpaRepository<MahasiswaEntity, String> {
     MahasiswaProjection findByNim(String nim);
 
 
-    @Query("SELECT f.idFakultas as idFakultas, f.namaFakultas as namaFakultas, COUNT(f.idFakultas) as jumlahMahasiswa FROM MahasiswaEntity m inner join m.fakultasEntity f where f.idFakultas = ?1 GROUP BY f.idFakultas")
+    @Query("SELECT f.idFakultas as idFakultas, f.namaFakultas as namaFakultas, COUNT(m.idFakultas) as jumlahMahasiswa FROM FakultasEntity f left join MahasiswaEntity m on f.idFakultas = m.idFakultas where f.idFakultas = ?1 GROUP BY f.idFakultas")
     MahasiswaCountByFakultasProjection countByIdFakultas(String idFakultas);
 
 }

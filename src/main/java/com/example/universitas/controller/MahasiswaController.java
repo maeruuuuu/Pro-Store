@@ -34,7 +34,7 @@ public class MahasiswaController {
     }
 
     @GetMapping
-    public MahasiswaProjection getMahasiswaById(@RequestParam(name = "data", defaultValue = "") String id, @RequestParam(name = "by", defaultValue = "") String findBy) {
+    public MahasiswaProjection getMahasiswaById(@RequestParam(name = "id", defaultValue = "") String id, @RequestParam(name = "findBy", defaultValue = "") String findBy) {
 
         if (findBy.equalsIgnoreCase("nim")) {
             return mahasiswaService.getMahasiswaByNim(id);
