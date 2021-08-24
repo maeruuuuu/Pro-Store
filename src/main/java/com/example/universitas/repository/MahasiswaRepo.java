@@ -1,6 +1,7 @@
 package com.example.universitas.repository;
 
 import com.example.universitas.model.entity.MahasiswaEntity;
+import com.example.universitas.model.projection.MahasiswaCountByFakultasProjection;
 import com.example.universitas.model.projection.MahasiswaProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,10 @@ public interface MahasiswaRepo extends JpaRepository<MahasiswaEntity, String> {
 
     MahasiswaProjection findByIdMahasiswa(String idMahasiswa);
 
-    @Query("SELECT COUNT(m.idMahasiswa) as jumlahMahasiswa FROM MahasiswaEntity m WHERE m.idFakultas=?1")
-    Object countByIdFakultas(String idFakultas);
+    MahasiswaProjection findByNim(String nim);
+
+
+    @Query("SELECT f.idFakultas as idFakultas, f.namaFakultas as namaFakultas, COUNT(f.idFakultas) as jumlahMahasiswa FROM MahasiswaEntity m inner join m.fakultasEntity f where f.idFakultas = ?1 GROUP BY f.idFakultas")
+    MahasiswaCountByFakultasProjection countByIdFakultas(String idFakultas);
 
 }

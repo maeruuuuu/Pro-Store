@@ -2,6 +2,7 @@ package com.example.universitas.controller;
 
 import com.example.universitas.model.dto.MahasiswaDto;
 import com.example.universitas.model.entity.MahasiswaEntity;
+import com.example.universitas.model.projection.MahasiswaCountByFakultasProjection;
 import com.example.universitas.model.projection.MahasiswaProjection;
 import com.example.universitas.service.MahasiswaServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -27,18 +28,29 @@ public class MahasiswaController {
         return modelMapper.map(mahasiswaService.saveMahasiswa(mahasiswaEntity), MahasiswaDto.class);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<MahasiswaProjection> getAllMahasiswa() {
         return mahasiswaService.getAllMahasiswa();
     }
 
-    @GetMapping("/{id}")
-    public MahasiswaProjection getMahasiswaById(@PathVariable("id") String idMahasiswa) {
-        return mahasiswaService.getMahasiswaById(idMahasiswa);
+    @GetMapping
+    public MahasiswaProjection getMahasiswaById(@RequestParam(name = "data", defaultValue = "") String id, @RequestParam(name = "by", defaultValue = "") String findBy) {
+
+        if (findBy.equalsIgnoreCase("nim")) {
+            return mahasiswaService.getMahasiswaByNim(id);
+        }
+
+        return mahasiswaService.getMahasiswaById(id);
+
     }
 
-    @GetMapping("jumlah/{id}")
-    public Object countMahasiswaByIdFakultas(@PathVariable("id") String idFakultas) {
-        return mahasiswaService.countMahasiswaByIdFakultas(idFakultas);
+    @GetMapping("jumlah")
+    public MahasiswaCountByFakultasProjection countMahasiswaByIdFakultas(@RequestParam(name = "id", defaultValue = "") String id, @RequestParam(name = "findBy",defaultValue = "") String countBy) {
+
+        if (countBy.equalsIgnoreCase("fakultas")) {
+            return mahasiswaService.countMahasiswaByIdFakultas(id);
+        }
+
+        return null;
     }
 }

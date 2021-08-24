@@ -19,7 +19,7 @@ public class FakultasEntity {
     @Column(name = "id_fakultas")
     private String idFakultas;
 
-    @Column(name = "nama_fakutas")
+    @Column(name = "nama_fakultas")
     private String namaFakultas;
 
     @Column(name = "kode_fakultas", unique = true)

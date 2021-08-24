@@ -1,6 +1,7 @@
 package com.example.universitas.service;
 
 import com.example.universitas.model.entity.MahasiswaEntity;
+import com.example.universitas.model.projection.MahasiswaCountByFakultasProjection;
 import com.example.universitas.model.projection.MahasiswaProjection;
 import com.example.universitas.repository.MahasiswaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,17 @@ public class MahasiswaServiceImpl implements MahasiswaService{
     }
 
     @Override
+    public MahasiswaProjection getMahasiswaByNim(String nim) {
+        return mahasiswaRepo.findByNim(nim);
+    }
+
+    @Override
     public MahasiswaEntity saveMahasiswa(MahasiswaEntity mahasiswaEntity) {
         return mahasiswaRepo.save(mahasiswaEntity);
     }
 
     @Override
-    public Object countMahasiswaByIdFakultas(String idFakultas) {
+    public MahasiswaCountByFakultasProjection countMahasiswaByIdFakultas(String idFakultas) {
         return mahasiswaRepo.countByIdFakultas(idFakultas);
     }
 }
