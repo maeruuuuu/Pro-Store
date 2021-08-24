@@ -1,7 +1,6 @@
 package com.example.universitas.service;
 
 import com.example.universitas.model.entity.DosenEntity;
-import com.example.universitas.model.entity.FakultasEntity;
 import com.example.universitas.repository.DosenRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +33,17 @@ public class DosenServiceImpl implements DosenService{
 
     @Override
     public DosenEntity findDosenNip (String nip){
-        return dosenRepo.findById(nip).get();
+        return dosenRepo.findDosenEntityByNip (nip);
     }
 
+    @Override
+    public long countDosenbyFakultas (String idFakultas){
+        return dosenRepo.countByIdFakultas(idFakultas);
+    }
 
-
-
+    @Override
+    public List<DosenEntity> findDosenbyFakultas (String idFakultas){
+        return dosenRepo.findDosenEntityByFakultas(idFakultas);
+    }
 
 }

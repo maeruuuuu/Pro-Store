@@ -50,9 +50,25 @@ public class DosenController {
         return dosenEntityList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{idDosen}")
+    @GetMapping(value = "/idDosen")
     public DosenDto findDosenId (@RequestParam("idDosen") String idDosen){
         return convertToDto(dosenService.findDosenId(idDosen));
+    }
+
+    @GetMapping(value = "/nip")
+    public DosenDto findDosenNip (@RequestParam("nip") String nip){
+        return convertToDto(dosenService.findDosenNip(nip));
+    }
+
+    @GetMapping(value = "/jumlahDosen")
+    public long countDosen (@RequestParam("idFakultas") String idFakultas){
+        return dosenService.countDosenbyFakultas(idFakultas);
+    }
+
+    @GetMapping(value = "/DosenFakultas")
+    public List<DosenDto> findDosenFakultas (@RequestParam("idFakultas") String idFakultas){
+        List<DosenEntity> dosenEntityList = dosenService.findDosenbyFakultas(idFakultas);
+        return dosenEntityList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
 
