@@ -54,4 +54,9 @@ public class FakultasController {
         FakultasEntity fakultasEdit = fakultasService.saveFakultas(fakultasEntity);
         return converToDto(fakultasEdit);
     }
+
+    @GetMapping("/jumlah/{id}")
+    public Object countJumlahByIdFakultas(@PathVariable("id") String idFakultas){
+        return fakultasService.countMahasiswaDosenByIdFakultas(idFakultas);
+    }
 }

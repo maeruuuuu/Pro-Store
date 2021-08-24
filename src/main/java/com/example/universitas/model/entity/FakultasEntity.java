@@ -4,11 +4,12 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "fakultas")
-public class FakultasEntity {
+public class FakultasEntity implements Serializable {
 
     @Id
     @GeneratedValue(generator = "fak-generator")
