@@ -10,4 +10,5 @@ public interface FakultasService {
     FakultasEntity getByFakultasId(String id);
 
     FakultasEntity saveFakultas(FakultasEntity fakultasEntity);
+
 }
