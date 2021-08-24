@@ -10,4 +10,6 @@ public class DosenDto {
     private String namaDosen;
 
     private String nip;
+
+    private String idFakultas;
 }
