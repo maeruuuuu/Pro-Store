@@ -67,7 +67,7 @@ public class JurusanController {
 
     //delete jurusan
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteJurusan(@PathVariable(value = "id") String jurusanId){
+    public Map<String, Boolean> deleteJurusan(@PathVariable(value = "id") String jurusanId)throws ResourceNotFoundException {
         jurusanService.delJurusanById(jurusanId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("delete", Boolean.TRUE);

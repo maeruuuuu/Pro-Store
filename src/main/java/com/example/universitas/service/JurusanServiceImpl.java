@@ -34,11 +34,11 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
-    public List<JurusanEntity> delJurusanById(String idJurusan) {
+    public ResponseEntity delJurusanById(String idJurusan) throws ResourceNotFoundException {
+        JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan)
+                .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id = " + idJurusan));
         jurusanRepo.deleteById(idJurusan);
-        List<JurusanEntity> jurusanEntities = new ArrayList<>();
-        jurusanRepo.findAll().forEach(jurusanEntities::add);
-        return jurusanEntities;
+        return (ResponseEntity) ResponseEntity.ok();
     }
 
     @Override
