@@ -11,7 +11,7 @@ public interface JurusanService {
 
     List<JurusanEntity> getAllJurusan();
     ResponseEntity<Optional<JurusanEntity>> getJurusanById(String id);
-    ResponseEntity delJurusanById(String id)throws ResourceNotFoundException ;
+    void delJurusanById(String id)throws ResourceNotFoundException ;
     List<JurusanEntity> getJurusanByFak(long fak);
     JurusanEntity saveJurusan(JurusanEntity jurusanEntity);
     ResponseEntity<JurusanEntity> updateJurusan(String idJurusan, JurusanEntity jurusanDetails)throws ResourceNotFoundException;

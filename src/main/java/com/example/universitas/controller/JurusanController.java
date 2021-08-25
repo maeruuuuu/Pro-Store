@@ -70,7 +70,7 @@ public class JurusanController {
     public Map<String, Boolean> deleteJurusan(@PathVariable(value = "id") String jurusanId)throws ResourceNotFoundException {
         jurusanService.delJurusanById(jurusanId);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("delete", Boolean.TRUE);
+        response.put("delete jurusan", Boolean.TRUE);
         return response;
     }
 

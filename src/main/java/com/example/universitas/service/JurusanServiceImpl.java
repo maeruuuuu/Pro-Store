@@ -33,12 +33,10 @@ public class JurusanServiceImpl implements JurusanService {
         return ResponseEntity.ok().body(jurusanEntities);
     }
 
-    @Override
-    public ResponseEntity delJurusanById(String idJurusan) throws ResourceNotFoundException {
+    public void delJurusanById(String idJurusan) throws ResourceNotFoundException {
         JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan)
                 .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id = " + idJurusan));
         jurusanRepo.deleteById(idJurusan);
-        return (ResponseEntity) ResponseEntity.ok();
     }
 
     @Override
