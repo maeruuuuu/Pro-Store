@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/dosen")
+@RequestMapping("api/dosen")
 public class DosenController {
 
     @Autowired

@@ -5,7 +5,13 @@ import com.example.universitas.model.entity.FakultasEntity;
 import java.util.List;
 
 public interface FakultasService {
+
     List<FakultasEntity> getAllFakultas();
-    FakultasEntity getByFakultasId(Long id);
-    public FakultasEntity saveFakultas(FakultasEntity fakultasEntity);
+
+    FakultasEntity getByFakultasId(String id);
+
+    FakultasEntity saveFakultas(FakultasEntity fakultasEntity);
+
+    Object countMahasiswaDosenByIdFakultas(String idFakultas);
+
 }
