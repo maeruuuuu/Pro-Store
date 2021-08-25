@@ -1,6 +1,7 @@
 package com.example.universitas.service;
 
 import com.example.universitas.exception.ResourceNotFoundException;
+import com.example.universitas.model.dto.JurusanDto;
 import com.example.universitas.model.entity.JurusanEntity;
 import com.example.universitas.repository.JurusanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,47 +29,47 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
-    public ResponseEntity<Optional<JurusanEntity>> getJurusanById(String idJurusan) {
-        Optional<JurusanEntity> jurusanEntities = jurusanRepo.findById(idJurusan);
-        return ResponseEntity.ok().body(jurusanEntities);
+    public JurusanEntity getJurusanById(String idJurusan) throws ResourceNotFoundException {
+        jurusanRepo.findById(idJurusan)
+                .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id = " + idJurusan));
+        JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan).get();
+        return jurusanEntity;
     }
 
-    @Override
-    public List<JurusanEntity> delJurusanById(String idJurusan) {
+    public void delJurusanById(String idJurusan) throws ResourceNotFoundException {
+        jurusanRepo.findById(idJurusan)
+                .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id = " + idJurusan));
         jurusanRepo.deleteById(idJurusan);
-        List<JurusanEntity> jurusanEntities = new ArrayList<>();
-        jurusanRepo.findAll().forEach(jurusanEntities::add);
-        return jurusanEntities;
     }
 
     @Override
-    public List<JurusanEntity> getJurusanByFak(long fkKodeFakultas) {
-        List<JurusanEntity> jurusanEntities = new ArrayList<>();
-        jurusanRepo.findByFak(fkKodeFakultas).forEach(jurusanEntities::add);
+    public List<JurusanEntity> getJurusanByFak(String idFakultas) {
+        List<JurusanEntity> jurusanEntities;
+        jurusanEntities = jurusanRepo.findByFak(idFakultas);
         return jurusanEntities;
     }
 
     @Override
     public JurusanEntity saveJurusan(JurusanEntity jurusanEntity) {
+
         return jurusanRepo.save(jurusanEntity);
     }
 
     @Override
-    public ResponseEntity<JurusanEntity> updateJurusan(String idJurusan, JurusanEntity jurusanDetails) throws ResourceNotFoundException {
+    public JurusanEntity updateJurusan(String idJurusan, JurusanEntity jurusanDetails) throws ResourceNotFoundException {
 
         JurusanEntity jurusanEntity = jurusanRepo.findById(idJurusan)
                 .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id :: " + idJurusan));
         jurusanEntity.setNamaJurusan(jurusanDetails.getNamaJurusan());
         jurusanEntity.setKodeJurusan(jurusanDetails.getKodeJurusan());
-        jurusanEntity.setFkKodeFakultas(jurusanDetails.getFkKodeFakultas());
+        jurusanEntity.setIdFakultas(jurusanDetails.getIdFakultas());
         final JurusanEntity updatedJurusan = jurusanRepo.save(jurusanEntity);
-        return ResponseEntity.ok(this.jurusanRepo.save(jurusanEntity));
+        return updatedJurusan;
     }
 
     @Override
-    public List<JurusanEntity> countJurByFak(Long fkKodeFakultas) {
-        List<JurusanEntity> jumlah;
-        jumlah = jurusanRepo.countJurByFak(fkKodeFakultas);
+    public Object countJurByFak(String idFakultas) {
+        Object jumlah = jurusanRepo.countJurByFak(idFakultas);
         return jumlah;
     }
 }

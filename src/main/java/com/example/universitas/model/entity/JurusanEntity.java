@@ -14,35 +14,27 @@ public class JurusanEntity {
     @GeneratedValue(generator = "jur-generator")
     @GenericGenerator(name = "jur-generator",
             parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "PRODI"),
-            strategy = "com.example.universitas.generator.MyGenerator"
+            strategy = "com.example.universitas.identifier.MyGenerator"
     )
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_jurusan")
     private String idJurusan;
 
     @Column(name = "nama_jurusan")
     private String namaJurusan;
 
-
-//    @GeneratedValue(generator = "sequence-generator")
-//    @GenericGenerator(
-//            name = "sequence-generator",
-//            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-//            parameters = {
-//                    @Parameter(name = "sequence_name", value = "jur"),
-//                    @Parameter(name = "initial_value", value = "1"),
-//                    @Parameter(name = "increment_size", value = "1")
-//            }
-//    )
-
-
-    @Column(name = "kode_jurusan")
+    @Column(name = "kode_jurusan", unique = true)
     private String kodeJurusan;
-    @Column(name = "fk_Kode_fakultas")
-    private Long fkKodeFakultas;
 
-//    @ManyToOne
-//    @JoinColumn(name = "jurusanEntity", insertable = false, updatable = false)
-//    private JurusanEntity jurusan;
+    @Column(name = "id_fakultas")
+    private String idFakultas;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "id_fakultas",
+            referencedColumnName = "id_fakultas",
+            insertable = false,
+            updatable = false
+    )
+    private FakultasEntity fakultasEntity;
 
 }
