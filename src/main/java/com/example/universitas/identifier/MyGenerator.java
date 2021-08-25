@@ -1,4 +1,4 @@
-package com.example.universitas.generator;
+package com.example.universitas.identifier;
 
 import java.io.Serializable;
 import java.util.Properties;
