@@ -36,28 +36,30 @@ public class JurusanController {
         return jurusanEntity;
     }
 
+    //get all jurusan
     @GetMapping()
     public List<JurusanDto> showAllJurusan() {
         List<JurusanEntity> jurusanEntities = jurusanService.getAllJurusan();
-        return jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<JurusanDto> jurusanDtos = jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
+        return jurusanDtos;
     }
 
+    //get jurusan by id
     @GetMapping("/{id}")
-//    public List<JurusanDto> showJurusanById(@PathVariable String id) {
-//        List<JurusanEntity> jurusanEntities = jurusanService.getJurusanById(id);
-//        return jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
-//    }
-    public ResponseEntity<Optional<JurusanEntity>> showJurusanById(@PathVariable(value="id") String jurusanId) throws ResourceNotFoundException {
-        return jurusanService.getJurusanById(jurusanId);
-//        return jurusanUpdate;
+    public JurusanDto showJurusanById(@PathVariable(value="id") String jurusanId) throws ResourceNotFoundException {
+        JurusanEntity jurusanEntity = jurusanService.getJurusanById(jurusanId);
+        JurusanDto jurusanDto = convertToDto(jurusanEntity);
+        return jurusanDto;
     }
 
+    //get jurusan by id fakultas
     @GetMapping(value = "/kodefak")
-    public List<JurusanDto> showJurusanByKodeFak(@RequestParam("fak") Long fak) {
+    public List<JurusanDto> showJurusanByKodeFak(@RequestParam("fak") String fak) {
         List<JurusanEntity> jurusanEntities = jurusanService.getJurusanByFak(fak);
         return jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
+    //add jurusan
     @PostMapping
     public JurusanDto insertJurusan(@RequestBody JurusanDto jurusanDto){
         JurusanEntity jurusanEntity = convertToEntity(jurusanDto);
@@ -76,13 +78,15 @@ public class JurusanController {
 
     // update jurusan
     @PutMapping("/{id}")
-    public ResponseEntity<JurusanEntity> updateJurusan(@PathVariable(value="id") String jurusanId, @RequestBody JurusanEntity jurusanEntity) throws ResourceNotFoundException {
-        ResponseEntity<JurusanEntity> jurusanUpdate = jurusanService.updateJurusan(jurusanId, jurusanEntity);
-        return jurusanUpdate;
+    public JurusanDto updateJurusan(@PathVariable(value="id") String jurusanId, @RequestBody JurusanDto jurusanDto) throws ResourceNotFoundException {
+        JurusanEntity jurusanEntity = convertToEntity(jurusanDto);
+        JurusanEntity jurusanUpdate = jurusanService.updateJurusan(jurusanId, jurusanEntity);
+        return convertToDto(jurusanUpdate);
     }
 
     @GetMapping("/fak/{fak}")
-    public List<JurusanEntity> countJurusan(@PathVariable(value = "fak") long fak){
+    public Object countJurusan(@PathVariable(value = "fak") String fak){
+
         return jurusanService.countJurByFak(fak);
     }
 }
