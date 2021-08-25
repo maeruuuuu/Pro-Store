@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/jurusan/")
+@RequestMapping(value = "api/jurusan")
 public class JurusanController {
 
     @Autowired
