@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface DosenRepo extends JpaRepository<DosenEntity, String> {
 
-//    @Query("SELECT COUNT (p) FROM DosenEntity p WHERE p.fakultas.idFakultas = :idFakultas")
-//    public DosenEntity countDosenEntityByFakultas (@PathParam("idFakultas") String idFakultas);
-
     @Query("SELECT p FROM DosenEntity p WHERE p.fakultas.idFakultas = :idFakultas")
     public List<DosenEntity> findDosenEntityByFakultas (@PathParam("idFakultas") String idFakultas);
 
