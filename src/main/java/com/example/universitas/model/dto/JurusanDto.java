@@ -8,5 +8,5 @@ public class JurusanDto {
     private String idJurusan;
     private String namaJurusan;
     private String kodeJurusan;
-    private long fkKodeFakultas;
+    private String idFakultas;
 }
