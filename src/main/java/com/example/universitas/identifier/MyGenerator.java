@@ -18,10 +18,10 @@ public class MyGenerator implements IdentifierGenerator, Configurable {
     @Override
     public Serializable generate(
             SharedSessionContractImplementor session, Object obj)
-            throws HibernateException {
+        throws HibernateException {
 
         String query = String.format("select %s from %s", session.getEntityPersister(obj.getClass().getName(), obj)
-                        .getIdentifierPropertyName(),
+                .getIdentifierPropertyName(),
                 obj.getClass().getSimpleName());
 
         Stream<String> ids = session.createQuery(query).stream();

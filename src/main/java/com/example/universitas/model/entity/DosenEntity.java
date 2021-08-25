@@ -22,13 +22,16 @@ public class DosenEntity{
     @Column(name = "nama_dosen")
     private String namaDosen;
 
-    @Column(name = "nip", length = 18)
+    @Column(name = "nip", length = 18, unique = true)
     private String nip;
 
 //    @ManyToOne
 //    private JurusanEntity jurusan;
 
-//    @ManyToOne
-//    private FakultasEntity fakultas;
+    @Column(name = "id_fakultas")
+    private String idFakultas;
+    @ManyToOne
+    @JoinColumn(name = "id_fakultas", insertable = false, updatable = false)
+    private FakultasEntity fakultas;
 
 }
