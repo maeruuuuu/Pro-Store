@@ -58,8 +58,9 @@ public class JurusanServiceImpl implements JurusanService {
                 .orElseThrow(() -> new ResourceNotFoundException("Jurusan not found for this id :: " + idJurusan));
         jurusanEntity.setNamaJurusan(jurusanDetails.getNamaJurusan());
         jurusanEntity.setKodeJurusan(jurusanDetails.getKodeJurusan());
+        jurusanEntity.setIdFakultas(jurusanDetails.getIdFakultas());
         final JurusanEntity updatedJurusan = jurusanRepo.save(jurusanEntity);
-        return ResponseEntity.ok(this.jurusanRepo.save(jurusanEntity));
+        return ResponseEntity.ok(updatedJurusan);
     }
 
     @Override
