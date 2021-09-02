@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/hello")
-public class TestController {
+@RequestMapping("/account")
+public class UserController {
 
     @GetMapping
     public ResponseEntity<String> hello(Authentication authentication) {
