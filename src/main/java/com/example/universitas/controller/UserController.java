@@ -56,7 +56,7 @@ public class UserController {
         user.setEnabled(true);
         user.setUsername(userDto.getEmail());
         user.setFirstName(userDto.getFirstname());
-        user.setLastName(user.getLastName());
+        user.setLastName(userDto.getLastname());
         user.setEmail(userDto.getEmail());
 
         // Get Realm
