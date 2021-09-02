@@ -4,16 +4,17 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "jurusan")
-public class JurusanEntity {
+public class JurusanEntity implements Serializable {
 
     @Id
     @GeneratedValue(generator = "jur-generator")
     @GenericGenerator(name = "jur-generator",
-            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "PRODI"),
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "PROD"),
             strategy = "com.example.universitas.identifier.MyGenerator"
     )
     @Column(name = "id_jurusan")
