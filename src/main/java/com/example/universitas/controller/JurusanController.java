@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class JurusanController {
 
     //get all jurusan
     @GetMapping()
+//    @RolesAllowed("admin")
     public List<JurusanDto> showAllJurusan() {
         List<JurusanEntity> jurusanEntities = jurusanService.getAllJurusan();
         List<JurusanDto> jurusanDtos = jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -46,6 +48,7 @@ public class JurusanController {
 
     //get jurusan by id
     @GetMapping("/{id}")
+    @RolesAllowed("admin")
     public JurusanDto showJurusanById(@PathVariable(value="id") String jurusanId) throws ResourceNotFoundException {
         JurusanEntity jurusanEntity = jurusanService.getJurusanById(jurusanId);
         JurusanDto jurusanDto = convertToDto(jurusanEntity);
@@ -54,6 +57,7 @@ public class JurusanController {
 
     //get jurusan by id fakultas
     @GetMapping(value = "/kodefak")
+    @RolesAllowed("admin")
     public List<JurusanDto> showJurusanByKodeFak(@RequestParam("fak") String fak) {
         List<JurusanEntity> jurusanEntities = jurusanService.getJurusanByFak(fak);
         return jurusanEntities.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -61,6 +65,7 @@ public class JurusanController {
 
     //add jurusan
     @PostMapping
+    @RolesAllowed({"user", "admin"})
     public JurusanDto insertJurusan(@RequestBody JurusanDto jurusanDto){
         JurusanEntity jurusanEntity = convertToEntity(jurusanDto);
         JurusanEntity jurusanUpdate = jurusanService.saveJurusan(jurusanEntity);
@@ -69,6 +74,7 @@ public class JurusanController {
 
     //delete jurusan
     @DeleteMapping("/{id}")
+    @RolesAllowed("admin")
     public Map<String, Boolean> deleteJurusan(@PathVariable(value = "id") String jurusanId)throws ResourceNotFoundException {
         jurusanService.delJurusanById(jurusanId);
         Map<String, Boolean> response = new HashMap<>();
